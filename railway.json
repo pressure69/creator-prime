@@ -1,4 +1,4 @@
-﻿{
+{
     "buildCommand":  "npm install \u0026\u0026 npm run build",
     "startCommand":  "npm start",
     "environmentVariables":  {
