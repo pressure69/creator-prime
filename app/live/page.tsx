@@ -1,13 +1,13 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function LivePage() {
   const router = useRouter();
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-  const outputCanvasRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const outputCanvasRef = useRef<HTMLCanvasElement>(null);
   const [selectedFilter, setSelectedFilter] = useState('');
   const [isLive, setIsLive] = useState(false);
   const [error, setError] = useState('');
@@ -20,10 +20,10 @@ export default function LivePage() {
   const [isPaused, setIsPaused] = useState(false);
   const [aiMode, setAiMode] = useState(false);
   const [aiEffectType, setAiEffectType] = useState('beauty'); // beauty, blur-bg, face-enhance
-  const mediaRecorderRef = useRef(null);
-  const recordedChunksRef = useRef([]);
-  const pauseTimerRef = useRef(null);
-  const animationFrameRef = useRef(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const recordedChunksRef = useRef<Blob[]>([]);
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
 
   const filters = [
     { id: 'beauty', label: '✨ BEAUTY', color: '#ec4899' },
@@ -38,7 +38,7 @@ export default function LivePage() {
     { id: 'dark', label: '🌑 DARK', color: '#000' },
   ];
 
-  const filterEffects = {
+  const filterEffects: { [key: string]: string } = {
     beauty: 'brightness(1.2) contrast(1.1) saturate(1.1)',
     smooth: 'blur(1px) brightness(1.15) saturate(1.05)',
     chill: 'hue-rotate(200deg) saturate(0.8) brightness(1.1)',
@@ -52,10 +52,12 @@ export default function LivePage() {
   };
 
   // APPLY BROWSER-SIDE AI FILTERS
-  const applyAIEffect = async (videoElement, outputCanvas) => {
+  const applyAIEffect = async (videoElement: HTMLVideoElement, outputCanvas: HTMLCanvasElement) => {
     if (!aiMode || !videoElement || !outputCanvas) return;
 
     const ctx = outputCanvas.getContext('2d');
+    if (!ctx) return;
+    
     outputCanvas.width = videoElement.videoWidth;
     outputCanvas.height = videoElement.videoHeight;
 
@@ -88,7 +90,7 @@ export default function LivePage() {
     }
 
     // Apply selected filter on top
-    if (selectedFilter) {
+    if (selectedFilter && filterEffects[selectedFilter]) {
       ctx.filter = `${filterEffects[selectedFilter]} brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%)`;
       ctx.drawImage(videoElement, 0, 0);
     }
@@ -107,11 +109,13 @@ export default function LivePage() {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
           videoRef.current.onloadedmetadata = () => {
-            videoRef.current.play().catch(err => {
-              console.error('Play error:', err);
-              setError('Could not play video');
-            });
-            setIsLive(true);
+            if (videoRef.current) {
+              videoRef.current.play().catch(err => {
+                console.error('Play error:', err);
+                setError('Could not play video');
+              });
+              setIsLive(true);
+            }
           };
 
           mediaRecorderRef.current = new MediaRecorder(stream);
@@ -119,9 +123,13 @@ export default function LivePage() {
             recordedChunksRef.current.push(e.data);
           };
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Camera error:', err);
-        setError(`${err.name}: ${err.message}`);
+        if (err instanceof Error) {
+          setError(`${err.name}: ${err.message}`);
+        } else {
+          setError('Failed to access camera');
+        }
       }
     };
 
@@ -129,7 +137,8 @@ export default function LivePage() {
 
     return () => {
       if (videoRef.current?.srcObject) {
-        videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+        const stream = videoRef.current.srcObject as MediaStream;
+        stream.getTracks().forEach(track => track.stop());
       }
       if (pauseTimerRef.current) clearInterval(pauseTimerRef.current);
     };
@@ -153,6 +162,8 @@ export default function LivePage() {
   const handleCapture = () => {
     if (!videoRef.current || !canvasRef.current) return;
     const ctx = canvasRef.current.getContext('2d');
+    if (!ctx) return;
+    
     canvasRef.current.width = videoRef.current.videoWidth;
     canvasRef.current.height = videoRef.current.videoHeight;
     ctx.filter = `${filterEffects[selectedFilter] || 'none'} brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%)`;
@@ -209,7 +220,7 @@ export default function LivePage() {
     setAiMode(!aiMode);
   };
 
-  const formatTime = (seconds) => {
+  const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -297,12 +308,12 @@ export default function LivePage() {
                 transition: 'all 0.3s',
               }}
               onMouseOver={(e) => {
-                e.target.style.background = 'rgba(75,85,101,0.9)';
-                e.target.style.transform = 'scale(1.05)';
+                (e.target as HTMLButtonElement).style.background = 'rgba(75,85,101,0.9)';
+                (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
               }}
               onMouseOut={(e) => {
-                e.target.style.background = 'rgba(55,65,81,0.7)';
-                e.target.style.transform = 'scale(1)';
+                (e.target as HTMLButtonElement).style.background = 'rgba(55,65,81,0.7)';
+                (e.target as HTMLButtonElement).style.transform = 'scale(1)';
               }}
             >
               ← BACK
@@ -672,10 +683,10 @@ export default function LivePage() {
                     boxShadow: '0 10px 25px rgba(107,114,128,0.3)',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   ← BACK
@@ -697,10 +708,10 @@ export default function LivePage() {
                     boxShadow: '0 10px 25px rgba(59,130,246,0.3)',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   📤 SHARE
@@ -726,10 +737,10 @@ export default function LivePage() {
                       : '0 10px 25px rgba(34,197,94,0.3)',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   {isGoingLive ? '🛑 LIVE' : '🎬 GO LIVE'}
@@ -755,10 +766,10 @@ export default function LivePage() {
                     opacity: isPaused ? 0.6 : 1,
                   }}
                   onMouseOver={(e) => {
-                    if (!isPaused) e.target.style.transform = 'scale(1.05)';
+                    if (!isPaused) (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   ⏸️ PAUSE
@@ -784,10 +795,10 @@ export default function LivePage() {
                     opacity: isGoingLive ? 1 : 0.6,
                   }}
                   onMouseOver={(e) => {
-                    if (isGoingLive) e.target.style.transform = 'scale(1.05)';
+                    if (isGoingLive) (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   ⏹️ STOP
@@ -815,12 +826,12 @@ export default function LivePage() {
                     boxShadow: '0 10px 25px rgba(168,85,247,0.4)',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
-                    e.target.style.boxShadow = '0 15px 35px rgba(168,85,247,0.6)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
+                    (e.target as HTMLButtonElement).style.boxShadow = '0 15px 35px rgba(168,85,247,0.6)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
-                    e.target.style.boxShadow = '0 10px 25px rgba(168,85,247,0.4)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.boxShadow = '0 10px 25px rgba(168,85,247,0.4)';
                   }}
                 >
                   📸 SNAP
@@ -845,10 +856,10 @@ export default function LivePage() {
                       : '0 10px 25px rgba(6,182,212,0.4)',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   {isRecording ? '⏹️ STOP REC' : '🎬 REC'}
@@ -873,10 +884,10 @@ export default function LivePage() {
                       : '0 10px 25px rgba(99,102,241,0.4)',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   🤖 {aiMode ? 'AI ON' : 'AI'}
@@ -897,10 +908,10 @@ export default function LivePage() {
                     boxShadow: '0 10px 25px rgba(100,116,139,0.4)',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.transform = 'scale(1.05)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.05)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.transform = 'scale(1)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
                   ✕ CLEAR
