@@ -1,0 +1,34 @@
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\DELL OPTIPLEX 5040\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\DELL OPTIPLEX 5040\projects\creator-prime\package-lock.json
+
+▲ Next.js 16.1.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.12.139:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 2.9s
+○ Compiling /live ...
+ GET /live 200 in 10.5s (compile: 9.7s, render: 813ms)
+ GET /live 200 in 8.3s (compile: 7.5s, render: 804ms)
+ GET /live 200 in 950ms (compile: 482ms, render: 468ms)
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\DELL OPTIPLEX 5040\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\DELL OPTIPLEX 5040\projects\creator-prime\package-lock.json
+
+▲ Next.js 16.1.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.12.139:3000
+- Environments: .env.local
+
+✓ Starting...
+⚠ Turbopack's filesystem cache has been deleted as the result of a user request. Builds or page loads may be slower as a result.
+✓ Ready in 5.4s
+○ Compiling /live ...
