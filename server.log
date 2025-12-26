@@ -32,3 +32,24 @@
 ⚠ Turbopack's filesystem cache has been deleted as the result of a user request. Builds or page loads may be slower as a result.
 ✓ Ready in 5.4s
 ○ Compiling /live ...
+✓ Finished writing to filesystem cache in 2.7min
+✓ Finished writing to filesystem cache in 2.0min
+✓ Finished writing to filesystem cache in 95s
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\DELLOP~1\AppData\Local\Temp\next-panic-fee326f4c334a79c20fd85d104ef9f5c.log.
+
+To help make Turbopack better, report this error by clicking here: https://github.com/vercel/next.js/discussions/new?category=turbopack-error-report&title=Turbopack%20Error%3A%20failed%20to%20receive%20message&body=Turbopack%20version%3A%20%60d1bd5b58%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0ATurbopack%20Error%3A%20failed%20to%20receive%20message%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace
+-----
+
+○ Compiling /_error ...
+✓ Finished writing to filesystem cache in 116s
+✓ Finished writing to filesystem cache in 69s
+✓ Finished writing to filesystem cache in 45s
+✓ Finished writing to filesystem cache in 70s
+✓ Finished filesystem cache database compaction in 64s
+✓ Finished writing to filesystem cache in 72s
+✓ Finished writing to filesystem cache in 39.1s
+ GET /live 500 in 30.0min (compile: 28.4min, render: 95s)
+ GET /live 500 in 29.9min (compile: 29.6min, render: 17.8s)
+ GET /live 500 in 30.1min (compile: 30.0min, render: 7.4s)
