@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -26,16 +26,16 @@ export default function LivePage() {
   const animationFrameRef = useRef<number | null>(null);
 
   const filters = [
-    { id: 'beauty', label: '✨ BEAUTY', color: '#ec4899' },
-    { id: 'smooth', label: '🎵 SMOOTH', color: '#3b82f6' },
-    { id: 'chill', label: '❄️ CHILL', color: '#06b6d4' },
-    { id: 'hype', label: '🔥 HYPE', color: '#f97316' },
-    { id: 'groovy', label: '🎶 GROOVY', color: '#a855f7' },
-    { id: 'vibes', label: '✨ VIBES', color: '#ec4899' },
-    { id: 'lofi', label: '☕ LO-FI', color: '#b45309' },
-    { id: 'ambient', label: '🌌 AMBIENT', color: '#6366f1' },
-    { id: 'trap', label: '⚡ TRAP', color: '#1e293b' },
-    { id: 'dark', label: '🌑 DARK', color: '#000' },
+    { id: 'beauty', label: 'âœ¨ BEAUTY', color: '#ec4899' },
+    { id: 'smooth', label: 'ðŸŽµ SMOOTH', color: '#3b82f6' },
+    { id: 'chill', label: 'â„ï¸ CHILL', color: '#06b6d4' },
+    { id: 'hype', label: 'ðŸ”¥ HYPE', color: '#f97316' },
+    { id: 'groovy', label: 'ðŸŽ¶ GROOVY', color: '#a855f7' },
+    { id: 'vibes', label: 'âœ¨ VIBES', color: '#ec4899' },
+    { id: 'lofi', label: 'â˜• LO-FI', color: '#b45309' },
+    { id: 'ambient', label: 'ðŸŒŒ AMBIENT', color: '#6366f1' },
+    { id: 'trap', label: 'âš¡ TRAP', color: '#1e293b' },
+    { id: 'dark', label: 'ðŸŒ‘ DARK', color: '#000' },
   ];
 
   const filterEffects: { [key: string]: string } = {
@@ -200,7 +200,7 @@ export default function LivePage() {
   const handleShare = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url);
-    alert('✅ Link copied to clipboard!');
+    alert('âœ… Link copied to clipboard!');
   };
 
   const handleAI = () => {
@@ -300,7 +300,7 @@ export default function LivePage() {
                 (e.target as HTMLButtonElement).style.transform = 'scale(1)';
               }}
             >
-              ← BACK
+              â† BACK
             </button>
 
             <div style={{ textAlign: 'center' }}>
@@ -315,7 +315,7 @@ export default function LivePage() {
                 backgroundClip: 'text',
                 color: 'transparent',
               }}>
-                🎬 CREATOR-PRIME
+                ðŸŽ¬ CREATOR-PRIME
               </h1>
               <p style={{
                 margin: '0.5rem 0 0',
@@ -325,7 +325,7 @@ export default function LivePage() {
                 color: '#999',
                 fontWeight: 600,
               }}>
-                {aiMode ? '🤖 AI-POWERED STUDIO' : 'Live Studio • Face Filters • HD Camera'}
+                {aiMode ? 'ðŸ¤– AI-POWERED STUDIO' : 'Live Studio â€¢ Face Filters â€¢ HD Camera'}
               </p>
             </div>
 
@@ -428,7 +428,7 @@ export default function LivePage() {
                   fontSize: '1rem',
                   boxShadow: '0 0 20px rgba(245,158,11,0.8)',
                 }}>
-                  ⏸️ {formatTime(pauseTimeLeft)}
+                  â¸ï¸ {formatTime(pauseTimeLeft)}
                 </div>
               )}
 
@@ -500,7 +500,7 @@ export default function LivePage() {
               display: 'flex',
               gap: '1rem',
             }}>
-              <label style={{ color: '#a78bfa', fontWeight: 'bold', alignSelf: 'center' }}>🤖 AI Effect:</label>
+              <label style={{ color: '#a78bfa', fontWeight: 'bold', alignSelf: 'center' }}>ðŸ¤– AI Effect:</label>
               <select
                 value={aiEffectType}
                 onChange={(e) => setAiEffectType(e.target.value)}
@@ -514,9 +514,9 @@ export default function LivePage() {
                   cursor: 'pointer',
                 }}
               >
-                <option value="beauty">✨ Beauty Mode (Smooth Skin)</option>
-                <option value="blur-bg">🌫️ Blur Background</option>
-                <option value="face-enhance">💎 Face Enhancement (Sharp)</option>
+                <option value="beauty">âœ¨ Beauty Mode (Smooth Skin)</option>
+                <option value="blur-bg">ðŸŒ«ï¸ Blur Background</option>
+                <option value="face-enhance">ðŸ’Ž Face Enhancement (Sharp)</option>
               </select>
             </div>
           )}
@@ -542,7 +542,7 @@ export default function LivePage() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-            <div>⚠️ {error}</div>
+            <div>âš ï¸ {error}</div>
             <button
               onClick={() => window.location.reload()}
               style={{
@@ -573,7 +573,7 @@ export default function LivePage() {
               fontSize: '5rem',
               animation: 'float 2s ease-in-out infinite',
             }}>
-              🎥
+              ðŸŽ¥
             </div>
             <h2 style={{
               fontSize: '2.5rem',
@@ -586,7 +586,7 @@ export default function LivePage() {
               INITIALIZING CAMERA
             </h2>
             <p style={{ color: '#999', fontSize: '1.1rem' }}>
-              ✅ Allow camera access in your browser popup
+              âœ… Allow camera access in your browser popup
             </p>
           </div>
         )}
@@ -632,7 +632,7 @@ export default function LivePage() {
                       fontWeight: 'bold',
                       color: '#fbbf24',
                     }}>
-                      ⏸️ {formatTime(pauseTimeLeft)}
+                      â¸ï¸ {formatTime(pauseTimeLeft)}
                     </div>
                   </div>
                 )}
@@ -664,7 +664,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  ← BACK
+                  â† BACK
                 </button>
 
                 <button
@@ -688,7 +688,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  📤 SHARE
+                  ðŸ“¤ SHARE
                 </button>
 
                 <button
@@ -716,7 +716,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  {isGoingLive ? '🛑 LIVE' : '🎬 GO LIVE'}
+                  {isGoingLive ? 'ðŸ›‘ LIVE' : 'ðŸŽ¬ GO LIVE'}
                 </button>
 
                 <button
@@ -744,7 +744,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  ⏸️ PAUSE
+                  â¸ï¸ PAUSE
                 </button>
 
                 <button
@@ -772,7 +772,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  ⏹️ STOP
+                  â¹ï¸ STOP
                 </button>
               </div>
 
@@ -804,7 +804,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.boxShadow = '0 10px 25px rgba(168,85,247,0.4)';
                   }}
                 >
-                  📸 SNAP
+                  ðŸ“¸ SNAP
                 </button>
 
                 <button
@@ -832,7 +832,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  {isRecording ? '⏹️ STOP REC' : '🎬 REC'}
+                  {isRecording ? 'â¹ï¸ STOP REC' : 'ðŸŽ¬ REC'}
                 </button>
 
                 <button
@@ -860,7 +860,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  🤖 {aiMode ? 'AI ON' : 'AI'}
+                  ðŸ¤– {aiMode ? 'AI ON' : 'AI'}
                 </button>
 
                 <button
@@ -884,7 +884,7 @@ export default function LivePage() {
                     (e.target as HTMLButtonElement).style.transform = 'scale(1)';
                   }}
                 >
-                  ✕ CLEAR
+                  âœ• CLEAR
                 </button>
               </div>
             </div>
@@ -910,7 +910,7 @@ export default function LivePage() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
                 }}>
-                  ☀️ BRIGHTNESS
+                  â˜€ï¸ BRIGHTNESS
                 </label>
                 <input
                   type="range"
@@ -953,7 +953,7 @@ export default function LivePage() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
                 }}>
-                  🔲 CONTRAST
+                  ðŸ”² CONTRAST
                 </label>
                 <input
                   type="range"
@@ -996,7 +996,7 @@ export default function LivePage() {
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
                 }}>
-                  🎨 SATURATION
+                  ðŸŽ¨ SATURATION
                 </label>
                 <input
                   type="range"
@@ -1038,7 +1038,7 @@ export default function LivePage() {
                   letterSpacing: '0.1em',
                   color: '#a78bfa',
                 }}>
-                  📊 STATUS
+                  ðŸ“Š STATUS
                 </h3>
                 <div style={{
                   display: 'flex',
@@ -1048,10 +1048,10 @@ export default function LivePage() {
                   color: '#999',
                   lineHeight: '1.6',
                 }}>
-                  <div>✅ Camera: <span style={{ color: '#22c55e', fontWeight: 'bold' }}>READY</span></div>
-                  <div>🎬 Filter: <span style={{ color: '#ec4899', fontWeight: 'bold' }}>{selectedFilter.toUpperCase() || 'NONE'}</span></div>
-                  <div>🔴 Record: <span style={{ color: isRecording ? '#dc2626' : '#999', fontWeight: 'bold' }}>{isRecording ? 'YES' : 'NO'}</span></div>
-                  <div>🤖 AI: <span style={{ color: aiMode ? '#8b5cf6' : '#999', fontWeight: 'bold' }}>{aiMode ? `${aiEffectType.toUpperCase()}` : 'OFF'}</span></div>
+                  <div>âœ… Camera: <span style={{ color: '#22c55e', fontWeight: 'bold' }}>READY</span></div>
+                  <div>ðŸŽ¬ Filter: <span style={{ color: '#ec4899', fontWeight: 'bold' }}>{selectedFilter.toUpperCase() || 'NONE'}</span></div>
+                  <div>ðŸ”´ Record: <span style={{ color: isRecording ? '#dc2626' : '#999', fontWeight: 'bold' }}>{isRecording ? 'YES' : 'NO'}</span></div>
+                  <div>ðŸ¤– AI: <span style={{ color: aiMode ? '#8b5cf6' : '#999', fontWeight: 'bold' }}>{aiMode ? `${aiEffectType.toUpperCase()}` : 'OFF'}</span></div>
                 </div>
               </div>
 
@@ -1066,12 +1066,12 @@ export default function LivePage() {
                   color: '#a78bfa',
                   lineHeight: '1.5',
                 }}>
-                  <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>💜 100% BROWSER AI</div>
+                  <div style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>ðŸ’œ 100% BROWSER AI</div>
                   <div style={{ color: '#999', fontSize: '0.75rem' }}>
-                    ✓ Zero server costs<br/>
-                    ✓ Runs on device<br/>
-                    ✓ Real-time processing<br/>
-                    ✓ Customer GPU/CPU
+                    âœ“ Zero server costs<br/>
+                    âœ“ Runs on device<br/>
+                    âœ“ Real-time processing<br/>
+                    âœ“ Customer GPU/CPU
                   </div>
                 </div>
               )}
@@ -1085,3 +1085,4 @@ export default function LivePage() {
     </div>
   );
 }
+
