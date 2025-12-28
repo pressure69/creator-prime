@@ -23,3 +23,5 @@ export default function TipButton({ amount, creatorId }: { amount: number; creat
     </button>
   );
 }
+
+

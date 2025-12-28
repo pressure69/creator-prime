@@ -58,6 +58,7 @@ export default function LivePage() {
     if (!aiMode || !videoElement || !outputCanvas) return;
 
     const ctx = outputCanvas.getContext('2d');
+if (!ctx) return;
     if (!ctx) return;
     
     outputCanvas.width = videoElement.videoWidth;
@@ -1085,4 +1086,5 @@ export default function LivePage() {
     </div>
   );
 }
+
 
