@@ -1,8 +1,10 @@
 ﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {
-    root: '.',
+  experimental: {
+    turbopack: false,
   },
+  output: 'standalone',
+  distDir: '.next'
 };
 
 module.exports = nextConfig;
