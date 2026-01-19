@@ -1,10 +1,9 @@
 ﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    turbopack: false,
-  },
   output: 'standalone',
-  distDir: '.next'
+  images: {
+    unoptimized: true
+  }
 };
 
 module.exports = nextConfig;
