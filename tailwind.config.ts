@@ -1,15 +1,15 @@
-﻿module.exports = {
+﻿import type { Config } from 'tailwindcss'
+
+export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        neon: {
-          pink: '#ff00ff',
-          purple: '#8b00ff',
-          glow: '#00ffff',
-        },
+        cyberBlack: '#0a0a0a',
+        cyberPurple: '#8b00ff',
+        neonPink: '#ff00ff',
       },
     },
   },
   plugins: [],
-};
+} satisfies Config;

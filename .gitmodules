@@ -1,0 +1,6 @@
+[submodule "src/AIChatOps"]
+	path = src/AIChatOps
+	url = https://github.com/Sourav01112/AIChatOps
+[submodule "src/Utilities"]
+	path = src/Utilities
+	url = https://github.com/farag2/Utilities
